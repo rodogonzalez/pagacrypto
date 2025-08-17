@@ -31,9 +31,7 @@ Route::group([
 
     Route::get('/', function () {
           return redirect('/admin');
-
     });
-
 
     Route::get('/support', [IndexController::class, 'supportLanding']);
     Route::get('/stats', [StatsController::class, 'generate_store_category_stats']);

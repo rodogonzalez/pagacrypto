@@ -40,8 +40,8 @@ class IndexController extends Controller
     public function show_order( $id )
     {
         $order              = Order::whereRaw("id =  '{$id}'")->first();
-        $products           = $order->products();
-        $store              = Local::where('id', $order->stores_id)->first();
+
+
         $payment_controller = new \App\Http\Controllers\PaymentController();
 
         $blockchain_deposits = [];
@@ -75,40 +75,16 @@ class IndexController extends Controller
                                     $blockchain_deposits[] = $block;
                                 }
                             }
-                        /*
-                            foreach ($block['inputs'] as $output) {
-                                if ($output['coin']['address'] == $order->crypto_wallet_transaction) {
-                                    //dd($block,$output,$order->crypto_wallet_transaction,$output['coin']);
-                                    $block['status']       = 'Confirmed - in';
-                                    $blockchain_deposits[] = $block;
-                                }
-                            }
-                        */
                     }
-
-
-
                 }
-
-
             }
-
         }
-
-
-
-
-
-
-
-
         $block_chain_explorer = "https://blockchair.com/litecoin/transaction/";
         $block_chain_wallet_explorer = "https://blockchair.com/litecoin/address/";
         return view('order.view', ['order' => $order, 'store' => $store, 'products' => $products, 'blockchain_deposits' => $blockchain_deposits, 'block_chain_explorer' => $block_chain_explorer, 'block_chain_wallet_explorer'=>$block_chain_wallet_explorer]);
     }
 
     // TODO: url signed
-
     public function WithDrawlsRequests()
     {
         return view('admin.user_withdrawl');
@@ -122,16 +98,12 @@ class IndexController extends Controller
     public function WithDrawlsRequests_process()
     {
         $current_user = backpack_user();
-
         if (is_null($current_user)) {
             abort(403);
         }
 
         $user_id = $current_user->id;
-
         $amount = \App\Helpers\Balance::get_balance_available();
-
-
 
         $withdrawal = \App\Models\Withdrawl::create(
             [
@@ -153,48 +125,17 @@ class IndexController extends Controller
             ]);
         }
 
-
-
-
-
-
-
         return view('admin.withdrawls.confirmation', ['withdrawal' => $withdrawal]);
     }
 
-    public function show_pos_dashboard( $id )
-    {
-        $request      = new Request;
-        $browser      = request()->userAgent();
-        $store        = \App\Models\Local::where('id', $id)->first();
-        $current_user = backpack_user();
-
-        if (!is_null($current_user)) {
-            if ($current_user->id == $store->users_id || $current_user->hasRole('admin')) {
-                $products = \App\Models\Product::where('stores_id', $id)->get()->toJSON();
-            } else {
-                abort(403);
-            }
-        } else {
-            abort(403);
-        }
-
-        // generate order
-        $order = \App\Helpers\Cart::set_cart($store->id );
-
-
-        return view('stores.pos',
-                        [
-                            'order'=> $order,
-                            'store' => $store,
-                            'products' => $products,
-                            'token' => csrf_token()
-                        ]
-                    );
-    }
 
     public function supportLanding()
     {
         return view('support');
+    }
+
+    public function show_deposit(){
+
+        return view('order.deposit', []);
     }
 }

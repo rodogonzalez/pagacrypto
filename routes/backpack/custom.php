@@ -25,7 +25,9 @@ Route::group(
         Route::get('/', [IndexController::class, 'indexAdmin']);
         Route::get('dashboard', [IndexController::class, 'indexAdmin']);
 
-        Route::get('pos/{id}', [IndexController::class, 'show_pos_dashboard']);
+        //Route::get('pos/{id}', [IndexController::class, 'show_pos_dashboard']);
+        Route::get('deposit', [IndexController::class, 'show_deposit'])->name('deposit_crypto');
+
         Route::get('account/withdrawls/', [IndexController::class, 'WithDrawlsRequests'])->name('user_withdrawls');
         Route::get('account/withdrawls/request', [IndexController::class, 'WithDrawlsRequests_step1'])->name('user_withdrawls_step1');
         Route::get('account/withdrawls/process', [IndexController::class, 'WithDrawlsRequests_process'])->name('user_withdrawls_step2');

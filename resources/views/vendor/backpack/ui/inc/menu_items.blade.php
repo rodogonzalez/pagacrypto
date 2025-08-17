@@ -15,7 +15,8 @@ if (!is_null($current_user)) {
             class="la la-home nav-icon"></i>{{ trans('backpack::base.dashboard') }}</a></li>
 @if ($user_role != 'demo')
 
-
+<li class="nav-item"><a class="nav-link" href="{{ route('deposit_crypto') }}"><i class="la la-file-invoice nav-icon"></i>
+        Nuevo Deposito</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="la la-file-invoice nav-icon"></i>
         {{__('telecripto.orders')}}</a></li>
 
