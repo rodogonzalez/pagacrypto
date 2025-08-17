@@ -18,6 +18,9 @@ class BankCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+
     use \App\Traits\UserOwnership;
 
     /**
@@ -32,6 +35,7 @@ class BankCrudController extends CrudController
 
 
         CRUD::setEntityNameStrings(__('telecripto.bank'), __('telecripto.banks'));
+        CRUD::setOperationSetting('showEntryCount', false);
     }
 
     /**
@@ -64,23 +68,38 @@ class BankCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BankRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+       // CRUD::setFromDb(); // set fields from db columns.
+
 
 
         CRUD::field('name')->label(__('telecripto.name'));
         CRUD::field('owner_name')->label(__('telecripto.owner_name'));
         CRUD::field('owner_id')->label(__('telecripto.owner_id'));
-        CRUD::field('owner_id_picture_front')->label(__('telecripto.owner_id_picture_front'));
-        CRUD::field('owner_id_picture_back')->label(__('telecripto.owner_id_picture_back'));
+        CRUD::field('status')->label(__('telecripto.status'))
+            ->type('select_from_array')
+            ->options( ['non-validated'=> 'Sin Validar', 'canceled'=> 'Cancelada', 'validated'=> 'Validada']) ;
+
+
+
+        //CRUD::field('owner_id_picture_front');
+        CRUD::field('owner_id_picture_front')
+            ->label(__('telecripto.owner_id_picture_front'))
+            ->type('upload')
+            ->withFiles([
+                'disk' => 'back_customer_folder',  // the disk where file will be stored
+
+            ]);
+
+        CRUD::field('owner_id_picture_back')
+            ->label(__('telecripto.owner_id_picture_back'))
+            ->type('upload')
+            ->withFiles([
+                'disk' => 'back_customer_folder',  // the disk where file will be stored
+
+            ]);
+
         CRUD::field('owner_phone')->label(__('telecripto.phone'));
         CRUD::field('iban_account')->label(__('telecripto.iban_account'));
-        CRUD::field('status')->label(__('telecripto.status'));
-
-
-
-
-
-
 
         $this->define_user_field();
 
@@ -97,4 +116,14 @@ class BankCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+      public function store()
+    {
+      // do something before validation, before save, before everything
+      $response = $this->traitStore();
+      //dd($response);
+      // do something after save
+      return $response;
+    }
+
 }

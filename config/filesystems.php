@@ -39,6 +39,13 @@ return [
             'serve' => true,
             'throw' => false,
         ],
+        'back_customer_folder' => [
+            'driver' => 'local',
+            'root' => '/home/rodolfo/pagacrypto_laravel/public/storage/users',
+            'url' => env('APP_URL').'/storage/users',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
 
         's3' => [

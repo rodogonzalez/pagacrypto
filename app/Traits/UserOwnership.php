@@ -19,7 +19,7 @@ trait UserOwnership
         } else {
             CRUD::field([
                 'name'       => 'users_id',
-                'type'       => 'hidden',
+                'type'       => 'text',
                 'default'    => $current_user->id,
                 'value'      => $current_user->id,
                 'attributes' => [
