@@ -1,0 +1,24 @@
+.cart {
+    font-family: System;
+    font-size: 1.2rem;
+
+    #pay-form {}
+
+    input {
+        text-align: center;
+        width: 50px;
+
+
+    }
+
+    &_payment {
+
+        margin: 10px;
+
+        &_total {
+            font-size: 1rem;
+
+        }
+    }
+
+}

@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "System";
+  src: url("../fonts/telecripto.ttf") format("truetype");
+}
+
+.system {
+  font-family: System;
+}
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

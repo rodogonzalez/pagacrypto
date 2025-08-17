@@ -1,0 +1,97 @@
+h3 {
+  font-size: 0.9rem;
+}
+h4 {
+  font-size: 0.75rem;
+}
+
+
+.store {
+  &-products {
+    //display: none;
+    //background-color: #ccc;
+    //
+
+    padding: 0px;
+    width: 100%;
+  }
+}
+
+.drawingBuffer {
+  display: none;
+}
+video {
+  width: 100%;
+  //max-width: 20vw;
+}
+.card-panel {
+  display: block;
+  a {
+    display: inline-block;
+    text-align: left;
+    border: 1px solid #bbb;
+  }
+
+  .btn-icon {
+    &-inventory,
+    &-pos,
+    &-settings {
+      width: 32px;
+      height: 32px;
+      display: inline-block;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    &-settings {
+      background-image: url("../icon/setting.png");
+    }
+    &-pos {
+      background-image: url("../icon/pos.jpg");
+    }
+    &-inventory {
+      background-image: url("../icon/inventory.png");
+    }
+  }
+}
+
+
+
+.scrollable{
+    overflow-y: auto;
+
+}
+
+
+.stores{
+    &_list{
+        height: 50vh;
+
+    }
+
+}
+
+@include media-breakpoint-down(lg) {
+  video {
+    width: 100%;
+    max-width: 70vw;
+  }
+
+  .full-mobile-width {
+    display: block;
+    width: 98vw;
+  }
+
+  .container-fluid {
+    width: 100vw;
+    padding: 0;
+    .col-7,
+    .col-5,
+    .col-6 {
+      width: 100vw;
+      display: block;
+      padding: 0;
+      padding-left: 19px;
+    }
+  }
+}

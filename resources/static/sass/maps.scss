@@ -1,0 +1,49 @@
+.leaflet-control-container{
+  display: none!important;
+}
+
+.map_crud,
+.map {
+  width: 100%;
+  height: 40vh;
+  max-height:400px;
+}
+
+#local_details {
+  height: 100%;
+  display: block;
+}
+
+.logo_pic {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+.logo_pic2 {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+}
+
+.btn_inscribase{
+
+    background-image: url('../icon/inscribase.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width:250px;
+    height:175px;
+    display: block;
+}
+
+@include media-breakpoint-down(lg) {
+
+  .map_crud,
+  .map {
+    width: 100%;
+    height: 40vh;
+  }
+
+
+
+}
