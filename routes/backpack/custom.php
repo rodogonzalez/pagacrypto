@@ -32,18 +32,14 @@ Route::group(
         Route::get('order/view/{id}', [IndexController::class, 'show_order']);
 
 
-        Route::crud('local', 'LocalCrudController');
-        Route::crud('product', 'ProductCrudController');
+
         Route::crud('order', 'OrderCrudController');
         Route::crud('user', 'UserCrudController');
-        Route::crud('customer', 'CustomerCrudController');
-        Route::crud('order-item', 'OrderItemCrudController');
+
         Route::crud('payment', 'PaymentCrudController');
         Route::crud('setting', 'SettingCrudController');
-        Route::crud('category', 'CategoryCrudController');
-        Route::crud('store', 'StoreCrudController');
+
         Route::crud('wallet', 'WalletCrudController');
-        Route::crud('local-type', 'LocalTypeCrudController');
         Route::crud('crypto-order-payment', 'CryptoOrderPaymentCrudController');
         Route::crud('withdrawl', 'WalletCrudController');
         Route::crud('withdrawl', 'WithdrawlCrudController');
