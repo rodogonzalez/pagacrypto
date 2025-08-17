@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Helpers\BlockBee;
 use App\Helpers\WalletObserver;
 use App\Models\CryptoOrderPayment;
-use App\Models\Local;
+
 use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Product;
+
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use Illuminate\Http\Request;
@@ -32,13 +31,9 @@ class IndexController extends Controller
             return $this->index();
         }
 
-        if (\App\Models\Local::all()->count() == 0)
-            return view('admin.welcome');
+        return view('admin.welcome');
 
-        $objStats         = new \App\Http\Controllers\StatsController;
-        $categories_stats = $objStats->generate_store_category_stats();
 
-        return view('admin.dashboard', ['objStats' => $objStats, 'categories_stats' => $categories_stats]);
     }
 
 

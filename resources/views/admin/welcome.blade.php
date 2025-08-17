@@ -20,7 +20,7 @@ if (!is_null($current_user)) {
 <div id="app" class="container">
 
 
-        <h1>¡Bienvenido a <b>Super Locales</b>!</h1>
+        <h1>¡Bienvenido a <b>Telecripto</b>!</h1>
 
         <h3>Estamos emocionados de tenerte aquí. Has llegado al lugar perfecto para dar el primer paso hacia tu propio
             negocio en línea. Con nuestra poderosa herramienta de punto de ventas, hemos hecho que crear tu tienda en línea
@@ -32,7 +32,6 @@ if (!is_null($current_user)) {
         </h3>
         <h1>Empieza hoy mismo y crea tu primera tienda en línea con solo unos clics.</h1>
 
-        <h2><a href="/admin/local/create" class="btn btn-primary" >¡El futuro de tu negocio comienza ahora!</a></h2>
 
 
 </div>

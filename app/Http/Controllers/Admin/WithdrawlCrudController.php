@@ -30,7 +30,7 @@ class WithdrawlCrudController extends CrudController
         CRUD::setModel(\App\Models\Withdrawl::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/withdrawl');
 
-        CRUD::setEntityNameStrings(__('superlocales.withdrawl'), __('superlocales.withdrawls'));
+        CRUD::setEntityNameStrings(__('telecripto.withdrawl'), __('telecripto.withdrawls'));
 
         //CRUD::denyAccess('show');
         CRUD::denyAccess('create');
@@ -57,14 +57,14 @@ class WithdrawlCrudController extends CrudController
     {
         CRUD::setFromDb(); // set columns from db columns.
 
-        CRUD::column('name')->label(__('superlocales.name'));
-        CRUD::column('owner_name')->label(__('superlocales.owner_name'));
-        CRUD::column('owner_id')->label(__('superlocales.owner_id'));
-        CRUD::column('owner_id_picture_front')->label(__('superlocales.owner_id_picture_front'));
-        CRUD::column('owner_id_picture_back')->label(__('superlocales.owner_id_picture_back'));
-        CRUD::column('owner_phone')->label(__('superlocales.phone'));
-        CRUD::column('iban_account')->label(__('superlocales.iban_account'));
-        CRUD::column('status')->label(__('superlocales.status'));
+        CRUD::column('name')->label(__('telecripto.name'));
+        CRUD::column('owner_name')->label(__('telecripto.owner_name'));
+        CRUD::column('owner_id')->label(__('telecripto.owner_id'));
+        CRUD::column('owner_id_picture_front')->label(__('telecripto.owner_id_picture_front'));
+        CRUD::column('owner_id_picture_back')->label(__('telecripto.owner_id_picture_back'));
+        CRUD::column('owner_phone')->label(__('telecripto.phone'));
+        CRUD::column('iban_account')->label(__('telecripto.iban_account'));
+        CRUD::column('status')->label(__('telecripto.status'));
 
 
     }
@@ -85,14 +85,14 @@ class WithdrawlCrudController extends CrudController
 
 
 
-        CRUD::field('amount')->label(__('superlocales.name'));
-        CRUD::field('iban_account')->label(__('superlocales.owner_name'));
-        CRUD::field('owner_id')->label(__('superlocales.owner_id'));
-        CRUD::field('owner_id_picture_front')->label(__('superlocales.owner_id_picture_front'));
-        CRUD::field('owner_id_picture_back')->label(__('superlocales.owner_id_picture_back'));
-        CRUD::field('owner_phone')->label(__('superlocales.phone'));
-        CRUD::field('iban_account')->label(__('superlocales.iban_account'));
-        CRUD::field('status')->label(__('superlocales.status'));
+        CRUD::field('amount')->label(__('telecripto.name'));
+        CRUD::field('iban_account')->label(__('telecripto.owner_name'));
+        CRUD::field('owner_id')->label(__('telecripto.owner_id'));
+        CRUD::field('owner_id_picture_front')->label(__('telecripto.owner_id_picture_front'));
+        CRUD::field('owner_id_picture_back')->label(__('telecripto.owner_id_picture_back'));
+        CRUD::field('owner_phone')->label(__('telecripto.phone'));
+        CRUD::field('iban_account')->label(__('telecripto.iban_account'));
+        CRUD::field('status')->label(__('telecripto.status'));
 
 
 
