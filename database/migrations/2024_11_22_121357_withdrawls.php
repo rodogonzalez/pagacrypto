@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::create('store_withdrawal_banks', function (Blueprint $table) {
+        Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('users_id');
             $table->string('name');
@@ -28,7 +28,7 @@ return new class extends Migration
 
         });
 
-        Schema::create('store_withdrawal', function (Blueprint $table) {
+        Schema::create('withdrawals', function (Blueprint $table) {
 
             $table->id();
             $table->bigInteger('users_id');

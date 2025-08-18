@@ -25,25 +25,23 @@ Route::group(
         Route::get('/', [IndexController::class, 'indexAdmin']);
         Route::get('dashboard', [IndexController::class, 'indexAdmin']);
 
-        Route::get('pos/{id}', [IndexController::class, 'show_pos_dashboard']);
+        //Route::get('pos/{id}', [IndexController::class, 'show_pos_dashboard']);
+        Route::get('deposit', [IndexController::class, 'show_deposit'])->name('deposit_crypto');
+
         Route::get('account/withdrawls/', [IndexController::class, 'WithDrawlsRequests'])->name('user_withdrawls');
         Route::get('account/withdrawls/request', [IndexController::class, 'WithDrawlsRequests_step1'])->name('user_withdrawls_step1');
         Route::get('account/withdrawls/process', [IndexController::class, 'WithDrawlsRequests_process'])->name('user_withdrawls_step2');
         Route::get('order/view/{id}', [IndexController::class, 'show_order']);
 
 
-        Route::crud('local', 'LocalCrudController');
-        Route::crud('product', 'ProductCrudController');
+
         Route::crud('order', 'OrderCrudController');
         Route::crud('user', 'UserCrudController');
-        Route::crud('customer', 'CustomerCrudController');
-        Route::crud('order-item', 'OrderItemCrudController');
+
         Route::crud('payment', 'PaymentCrudController');
         Route::crud('setting', 'SettingCrudController');
-        Route::crud('category', 'CategoryCrudController');
-        Route::crud('store', 'StoreCrudController');
+
         Route::crud('wallet', 'WalletCrudController');
-        Route::crud('local-type', 'LocalTypeCrudController');
         Route::crud('crypto-order-payment', 'CryptoOrderPaymentCrudController');
         Route::crud('withdrawl', 'WalletCrudController');
         Route::crud('withdrawl', 'WithdrawlCrudController');

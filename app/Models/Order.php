@@ -15,6 +15,7 @@ class Order extends Model
         'customer_id',
         'users_id',
         'stores_id',
+        'fiat_total_amount',
         'status',
         'crypto_wallet_total_amount',
         'currency',
@@ -22,23 +23,6 @@ class Order extends Model
     ];
 
 
-    public function products()
-    {
-        $items = DB::table('order_items')
-            ->rightJoin('products', 'products.id', '=', 'order_items.product_id')
-            ->where('order_items.order_id', $this->id)
-            ->select('products.*','order_items.*' )
-            ->get();
-
-        return $items;
-
-    }
-
-
-    public function items()
-    {
-        return $this->hasMany(OrderItem::class);
-    }
 
     public function payments()
     {
@@ -64,12 +48,7 @@ class Order extends Model
         return __('customer.working');
     }
 
-    public function total()
-    {
-        return $this->items->map(function ($i){
-            return $i->price * $i->quantity;
-        })->sum();
-    }
+
 
     public function crypto_payments()
     {
@@ -86,11 +65,6 @@ class Order extends Model
         })->sum();
     }
 
-
-    public function formattedTotal()
-    {
-        return number_format($this->total(), 2);
-    }
 
     public function receivedAmount()
     {

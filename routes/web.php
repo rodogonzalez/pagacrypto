@@ -31,9 +31,7 @@ Route::group([
 
     Route::get('/', function () {
           return redirect('/admin');
-
     });
-
 
     Route::get('/support', [IndexController::class, 'supportLanding']);
     Route::get('/stats', [StatsController::class, 'generate_store_category_stats']);
@@ -53,22 +51,5 @@ Route::group([
     Route::get('/payment-status/{order_id}', [PaymentController::class, 'check_order_status'])->name('check_payment_status');
 
 
-    Route::get('/get-locals', function () {
-        return response()->json(\App\Models\Local::all());
-    });
-    Route::get('/search/products/code/{store_id}/{name}', function ($store_id, $code) {
-        if ($code == '') {
-            return response()->json(\App\Models\Product::where('stores_id', $store_id)->get());
-        } else
-            return response()->json(\App\Models\Product::where('stores_id', $store_id)->where('barcode', 'like', "$code%")->get());
-    });
-    Route::get('/search/products/{store_id}/bar-code/{code}', function ($store_id, $code) {
-        return response()->json(\App\Models\Product::where('stores_id', $store_id)->where('barcode', $code)->first());
-    });
-    Route::get('/search/products/term/{store_id}/{name}', function ($store_id, $name) {
-        if ($name == '') {
-            return response()->json(\App\Models\Product::where('stores_id', $store_id)->get());
-        } else
-            return response()->json(\App\Models\Product::where('stores_id', $store_id)->where('name', 'like', "%$name%")->get());
-    });
+
 });

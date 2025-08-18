@@ -39,22 +39,14 @@ return [
             'serve' => true,
             'throw' => false,
         ],
-
-        'products_folder' => [
+        'back_customer_folder' => [
             'driver' => 'local',
-            'root' => '/home/rodolfo/dev/laravel-vue-pos/public/storage/products',
-            'url' => env('APP_URL').'/storage/products',
+            'root' => '/home/rodolfo/pagacrypto_laravel/public/storage/users',
+            'url' => env('APP_URL').'/storage/users',
             'visibility' => 'public',
             'throw' => false,
         ],
 
-        'store_folder' => [
-            'driver' => 'local',
-            'root' => '/home/rodolfo/dev/laravel-vue-pos/public/storage/stores',
-            'url' => env('APP_URL').'/storage/stores',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
 
         's3' => [
             'driver' => 's3',

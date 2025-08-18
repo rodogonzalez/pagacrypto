@@ -19,9 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'admin',
         ]);
 
-        \Backpack\PermissionManager\app\Models\Role::create([
-            'name' => 'storeadmin',
-        ]);
+
 
         \Backpack\PermissionManager\app\Models\Role::create([
             'name' => 'customer',
@@ -40,26 +38,9 @@ class UserSeeder extends Seeder
             'password'   => bcrypt('Rmfonseca2025')
         ]);
 
-        $admin->assignRole('storeadmin');
+        $admin->assignRole('customer');
 
 
-
-
-        $admin = User::updateOrCreate([
-            'name'       => 'demo',
-            'first_name' => 'Demo',
-            'last_name'  => 'demo',
-            'email'      => 'rodogonzalez@msn.com'
-        ], [
-            'name'       => 'demo',
-            'first_name' => 'Demo',
-            'last_name'  => 'Demo',
-            'email'      => 'rodogonzalez@msn.com',
-            'password'   => bcrypt('R0d0lfit0!')
-        ]);
-
-        $admin->assignRole('storeadmin');
-        //$admin->assignRole('admin');
 
 
         $admin = User::updateOrCreate([
