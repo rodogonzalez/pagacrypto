@@ -21,29 +21,18 @@ class PaymentController extends Controller
 {
     public function process_payment_order( $order_id, Request $request )
     {
+        $input                    = $request->all();
+        $order                    = Order::find($order_id);
+        $coin                     = $input['xcoin'];
+        $order->currency          = $coin;
+        $amount                   = $input['amount'];
+        $order->fiat_total_amount = $amount;
+        $amount                   = 0.4;
+        $conversion               = BlockBee::get_convert($coin, $amount, env('COINPAYMENT_CURRENCY'), env('BLOCKBEE_API'));
 
-        $input           = $request->all();
-        $order           = Order::find($order_id);
-        $coin            = $input['xcoin'];
-        $order->currency = $coin;
-
-        OrderItem::where('order_id', $order_id)->delete();
-
-        foreach ($input['products'] as $item) {
-            $qty        = $item['qty'];
-            $product_id = $item['id'];
-            $price      = Product::find($product_id)->price;
-            $order_item = OrderItem::create(['order_id' => $order_id, 'quantity' => $qty, 'product_id' => $product_id, 'price' => $price]);
-        }
-
-        $amount                            = $order->total();
-        $amount                            = 0.4;
-        $conversion                        = BlockBee::get_convert($coin, $amount, env('COINPAYMENT_CURRENCY'), env('BLOCKBEE_API'));
         $order->crypto_wallet_total_amount = $conversion->value_coin;
         $order->save();
-
         return $this->pay_order($order);
-
     }
 
     public function generate_payment_order( Request $request )
@@ -94,7 +83,7 @@ class PaymentController extends Controller
             abort(401);
         }
 
-        $options  = new QROptions(
+        $options = new QROptions(
             [
                 'eccLevel'   => QRCode::ECC_L,
                 'outputType' => QRCode::OUTPUT_MARKUP_SVG,
@@ -102,7 +91,7 @@ class PaymentController extends Controller
             ]
         );
 
-        $this_url = $request->fullUrl();
+        $this_url    = $request->fullUrl();
         $this_url_qr = (new QRCode($options))->render($this_url);
 
         return view('order.googlepay', ['order' => $order, 'this_url_qr' => $this_url_qr]);
@@ -111,37 +100,28 @@ class PaymentController extends Controller
 
     public function pay_order( Order $order )
     {
-        /*
-                // security check?
-                if (!$request->hasValidSignature()) {
-                    abort(401);
-                }
 
-            */
         date_default_timezone_set('America/Costa_Rica');
-        $amount      = $order->total();
+        $amount      = $order->fiat_total_amount;
         $amount      = 0.4;
         $seconds     = ((60 * 10) + 2);
         $expire_time = date('M d Y H:i:s', strtotime("$seconds seconds"));
         $coin        = $order->currency;
-        //  env( 'BLOCKBEE_COIN' );
-
-        $store = Local::find($order->stores_id);
-
-        $my_address = env('BLOCKBEE_WALLET_ADDRES');
+        $store       = 0;
+        $my_address  = env('BLOCKBEE_WALLET_ADDRES');
 
         switch ($coin) {
             case 'bch':
-                $my_address = is_null($store->wallet_bch) ? env('BCH_BLOCKBEE_WALLET_ADDRES') : $store->wallet_bch;
+                $my_address =  env('BCH_BLOCKBEE_WALLET_ADDRES') ;
                 break;
 
             case 'ltc':
-                $my_address = is_null($store->wallet_ltc) ? env('LTC_BLOCKBEE_WALLET_ADDRES') : $store->wallet_ltc;
+                $my_address =  env('LTC_BLOCKBEE_WALLET_ADDRES') ;
                 break;
 
             case 'doge':
 
-                $my_address = is_null($store->wallet_doge) ? env('DOGE_BLOCKBEE_WALLET_ADDRES') : $store->wallet_doge;
+                $my_address =  env('DOGE_BLOCKBEE_WALLET_ADDRES') ;
                 break;
 
         }

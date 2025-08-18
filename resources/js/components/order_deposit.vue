@@ -5,21 +5,21 @@ import { ref, reactive, onMounted } from "vue";
 import fxBeepOK from "./sounds/ok-beep.mp3";
 import fxBeepErr from "./sounds/error.mp3";
 
-const props = defineProps(["storeid", "name", "currency", "products", "is_mobile", "orderid", "logo"]);
+const props = defineProps(["order_id"]);
 const SoundBeepOk = new Audio(fxBeepOK);
 const SoundBeepErr = new Audio(fxBeepErr);
 const refresh_rate = 1000;
 const token_value = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 const csrf = ref(token_value);
 
-const cart = reactive({
+const order = reactive({
   total: 0,
   status: "incomplete",
   payment_status: "",
 
 });
 
-
+let deposit_amount = ref(100);
 function playAudio() {
   SoundBeepOk.play();
 }
@@ -33,7 +33,7 @@ function playErrAudio() {
 function check_payment_status() {
   if (order.payment_status == "paid") return;
 
-  var url = "/api/payment-status/" + props.orderid;
+  var url = "/api/payment-status/" + props.order_id;
   fetch(url)
     .then(response => response.json())
     .then(json => {
@@ -62,9 +62,9 @@ function show_payment_popup() {
   Swal.showLoading();
   axios({
     method: "post",
-    url: "/api/process-payment/" + props.orderid,
+    url: "/api/process-payment/" + props.order_id,
     data: {
-      products: order.products,
+      amount: document.getElementById("deposit_amount").value,
       xcoin: document.getElementById("xcoin").value
     }
   }).then(function(response) {
@@ -87,13 +87,21 @@ function show_payment_popup() {
 }
 
 onMounted(() => {
-  open_camera();
-  update_camera_viewer();
+
 });
 </script>
 <template>
   <div class=" ">
+
+    {{props.order_id}}
     <h1>Cuanto desea depositar ? </h1>
-        <input >
+        <input id="deposit_amount" v-model="deposit_amount" >
+         <select id="xcoin" name="xcoin">
+            <option value="ltc" selected>Litecoin</option>
+            <option value="doge">Dogecoin</option>
+            <option value="bch">Bitcoin Cash</option>
+            <option value="bct">Bitcoin</option>
+          </select>
+        <button v-on:click="show_payment_popup()" >DEPOSITAR</button>
   </div>
 </template>

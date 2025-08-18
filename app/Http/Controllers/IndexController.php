@@ -136,6 +136,16 @@ class IndexController extends Controller
 
     public function show_deposit(){
 
-        return view('order.deposit', []);
+        $current_user = backpack_user();
+
+        if (!is_null($current_user)) {
+            $user_id = $current_user->id;
+        }
+
+
+        $order = Order::create(['users_id' => $user_id, 'stores_id' => 0, 'currency' => env('DEFAULT_COIN')]);
+
+
+        return view('order.deposit', ['order'=>$order]);
     }
 }

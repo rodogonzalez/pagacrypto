@@ -4,6 +4,7 @@
     <div id="app" class="">
         <div class=" ">
             <deposit-component class=""
+                :order_id={{$order->id}}
 
             />
         </div>
