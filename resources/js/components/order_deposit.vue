@@ -93,7 +93,7 @@ onMounted(() => {
 <template>
   <div class=" ">
 
-    {{props.order_id}}
+
     <h1>Cuanto desea depositar ? </h1>
         <input id="deposit_amount" v-model="deposit_amount" >
          <select id="xcoin" name="xcoin">

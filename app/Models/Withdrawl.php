@@ -18,7 +18,7 @@ class Withdrawl extends Model
     */
 
 
-    protected $table = 'store_withdrawal';
+    protected $table = 'withdrawals';
 
     protected $fillable = [
         'users_id',

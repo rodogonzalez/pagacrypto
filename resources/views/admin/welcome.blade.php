@@ -17,7 +17,7 @@ if (!is_null($current_user)) {
 
 @section('content')
 
-<div id="app" class="container">
+<div id="app" class="container system">
 
 
         <h1>¡Bienvenido a <b>Telecripto</b>!</h1>

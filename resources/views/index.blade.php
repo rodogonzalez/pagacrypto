@@ -18,7 +18,7 @@ if (!is_null($current_user)) {
 
 @section('content')
 
-    <div id="app" class="container-fluid">
+    <div id="app" class="container-fluid system">
         <div class="container">
 
             @include('admin.welcome-content-guest')

@@ -29,22 +29,12 @@ class WithdrawlCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Withdrawl::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/withdrawl');
-
         CRUD::setEntityNameStrings(__('telecripto.withdrawl'), __('telecripto.withdrawls'));
-
-        //CRUD::denyAccess('show');
         CRUD::denyAccess('create');
         CRUD::denyAccess('delete');
-        //CRUD::denyAccess('list');
-
-        //$crud->hasAccess('')
-
         if (!\Auth::user()->hasRole('admin')) {
             CRUD::denyAccess('update');
-
         }
-
-
     }
 
     /**
@@ -56,7 +46,6 @@ class WithdrawlCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
-
         CRUD::column('name')->label(__('telecripto.name'));
         CRUD::column('owner_name')->label(__('telecripto.owner_name'));
         CRUD::column('owner_id')->label(__('telecripto.owner_id'));
@@ -65,26 +54,13 @@ class WithdrawlCrudController extends CrudController
         CRUD::column('owner_phone')->label(__('telecripto.phone'));
         CRUD::column('iban_account')->label(__('telecripto.iban_account'));
         CRUD::column('status')->label(__('telecripto.status'));
-
-
     }
 
-    /**
-     * Define what happens when the Create operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(WithdrawlRequest::class);
-
-        CRUD::setFromDb(); // set fields from db columns.
+        CRUD::setFromDb();
         $this->define_user_field();
-
-
-
-
         CRUD::field('amount')->label(__('telecripto.name'));
         CRUD::field('iban_account')->label(__('telecripto.owner_name'));
         CRUD::field('owner_id')->label(__('telecripto.owner_id'));
@@ -93,19 +69,8 @@ class WithdrawlCrudController extends CrudController
         CRUD::field('owner_phone')->label(__('telecripto.phone'));
         CRUD::field('iban_account')->label(__('telecripto.iban_account'));
         CRUD::field('status')->label(__('telecripto.status'));
-
-
-
-
-
     }
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();

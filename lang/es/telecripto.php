@@ -3,8 +3,8 @@
 return [
     'store'                  => 'Tienda',
     'stores'                 => 'Tiendas',
-    'order'                  => 'Orden',
-    'orders'                 => 'Ordenes',
+    'order'                  => 'Deposito',
+    'orders'                 => 'Depositos',
     'products'               => 'Productos',
     'product'                => 'Producto',
     'clients'                => 'Clientes',

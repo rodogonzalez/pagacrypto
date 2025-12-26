@@ -24,12 +24,11 @@ if (!is_null($current_user)) {
 
 
 
-<x-backpack::menu-item title="Wallets" icon="la la-wallet" :link="backpack_url('wallet')" />
-<x-backpack::menu-item title="Crypto order payments" icon="la la-question"
-    :link="backpack_url('crypto-order-payment')" />
 
-<x-backpack::menu-item title="Pagos" icon="la  la-file-invoice-dollar" :link="backpack_url('payment')" />
-<x-backpack::menu--item title="{{__('telecripto.withdrawls')}}" icon="la la-money-check-alt"
+
+
+
+<x-backpack::menu-item title="{{__('telecripto.withdrawls')}}" icon="la la-money-check-alt"
     :link="backpack_url('withdrawl')" />
 <x-backpack::menu-item title="{{__('telecripto.banks')}}" icon="la la-university"
     :link="backpack_url('bank')" />
@@ -76,7 +75,3 @@ if (!is_null($current_user)) {
 </x-backpack::menu-dropdown>
 @endif
 @endif
-
-
-
-@include('ads.ad-side')
